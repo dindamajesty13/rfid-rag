@@ -1,25 +1,43 @@
-# 📡 RFID-RAG  
-AI-Powered Retrieval-Augmented Generation System for RFID Knowledge
+# RFID-RAG: Retrieval-Augmented Generation for RFID Data
 
-RFID-RAG adalah sistem **AI Question Answering berbasis Retrieval-Augmented Generation (RAG)** yang dirancang khusus untuk topik **RFID (Radio Frequency Identification)**.
-
-Sistem ini menggabungkan **semantic vector search**, **knowledge base lokal**, **Large Language Model (LLM)**, dan **online search fallback** untuk menghasilkan jawaban yang **akurat, kontekstual, dan natural**, bahkan ketika pengetahuan lokal belum lengkap.
+**Repository:** https://github.com/dindamajesty13/rfid-rag  
+**Author:** Dinda Majesty
 
 ---
 
-## ✨ Features
+## Overview
 
-- 🔍 **Semantic Vector Search** (berbasis makna, bukan keyword)
-- 🧠 **Hybrid RAG Architecture** (Local KB + Online Search + LLM)
-- 🌐 **Online Search Fallback** saat confidence rendah
-- 🗂️ **Human-in-the-loop Knowledge Approval**
-- 📊 **Confidence Score** untuk setiap jawaban
-- 🔌 **API-first Design** (Web, WhatsApp, Telegram, n8n)
-- 💻 **CPU-only** (tanpa GPU)
+This project implements a **Retrieval-Augmented Generation (RAG)** pipeline that integrates large language models (LLMs) with a vector-based retrieval system, specifically designed to work with **RFID data sources**. The goal is to improve the **accuracy and relevance of generated responses** when querying structured RFID traces and associated metadata.
+
+RAG is widely studied in modern NLP for tasks where grounding a model’s output in external knowledge (retrieved documents or traces) can reduce hallucination and improve factuality. This project explores the impact of retrieval quality and retrieval-generation interaction in a real-world IoT dataset context.
 
 ---
 
-## 🏗️ System Architecture
+## Motivation
+
+Large language models often produce **plausible but ungrounded answers** when no explicit knowledge is available within model parameters. Combining LLMs with external knowledge sources (via vector retrieval and embeddings) helps anchor responses on **actual data**, addressing:
+
+- hallucination in generative responses  
+- domain-specific queries where raw LLM answers are insufficient  
+- grounding language generation on structured sensor traces
+
+This repository explores RAG for RFID log data — a non-textual, structured source relevant to logistics and warehouse management.
+
+---
+
+## Features
+
+- **Semantic Vector Search** (berbasis makna, bukan keyword)
+- **Hybrid RAG Architecture** (Local KB + Online Search + LLM)
+- **Online Search Fallback** saat confidence rendah
+- **Human-in-the-loop Knowledge Approval**
+- **Confidence Score** untuk setiap jawaban
+- **API-first Design** (Web, WhatsApp, Telegram, n8n)
+- **CPU-only** (tanpa GPU)
+
+---
+
+## System Architecture
 
 ```
 User Question
@@ -35,7 +53,7 @@ Confidence Evaluation
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 rfid-rag/
@@ -55,7 +73,7 @@ rfid-rag/
 
 ---
 
-## ⚙️ Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |-----|-----------|
@@ -69,7 +87,39 @@ rfid-rag/
 
 ---
 
-## 🚀 Getting Started (Conda)
+## Retrieval & Generation Pipeline
+
+This project implements a RAG pipeline with the following components:
+
+1. **Document/trace embedding generation**  
+   Using embedding models to map RFID traces into vector space.
+
+2. **Vector index creation**  
+   Building a FAISS (or similar) index for efficient retrieval.
+
+3. **Query contextualization**  
+   Formulating NLP queries that mix natural language and trace context.
+
+4. **Retrieval & fusion**  
+   Retrieving relevant traces/documents and fusing into a prompt.
+
+5. **LLM generation**  
+   Generating responses from an instruction-tuned or base LLM.
+
+---
+
+## Research Contributions (Exploratory)
+
+This project includes exploratory research on:
+
+- retrieval quality vs. generated response factuality  
+- effects of contextualized queries on hallucination control  
+- comparison of raw vs. RAG-augmented LLM outputs
+- domain-specific vs. generic retrieval strategies
+
+---
+
+## Getting Started (Conda)
 
 ### 1. Create Environment
 ```bash
@@ -105,7 +155,7 @@ http://localhost:8000
 
 ---
 
-## 🧠 Knowledge Workflow
+## Knowledge Workflow
 
 1. User asks a question
 2. Semantic vector search is performed
@@ -121,3 +171,11 @@ data/data_pending.json
 ```bash
 data/data.json
 ```
+
+---
+
+## Future Work
+Planned extensions include:
+1. Quantitative evaluation with relevant datasets
+2. Systematic measurement of retrieval accuracy vs. hallucination rate
+3. Advanced retrieval fusion techniques (e.g., re-rankers)
