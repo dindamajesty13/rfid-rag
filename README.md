@@ -13,6 +13,14 @@ RAG is widely studied in modern NLP for tasks where grounding a model’s output
 
 ---
 
+## Research Scope
+
+This repository is intended as an **exploratory research artifact**, not a production system. 
+The focus is on understanding how retrieval mechanisms, confidence estimation, and fallback strategies 
+affect the grounding behavior and reliability of large language models when applied to structured, non-textual data.
+
+---
+
 ## Motivation
 
 Large language models often produce **plausible but ungrounded answers** when no explicit knowledge is available within model parameters. Combining LLMs with external knowledge sources (via vector retrieval and embeddings) helps anchor responses on **actual data**, addressing:
@@ -27,13 +35,12 @@ This repository explores RAG for RFID log data — a non-textual, structured sou
 
 ## Features
 
-- **Semantic Vector Search** (berbasis makna, bukan keyword)
-- **Hybrid RAG Architecture** (Local KB + Online Search + LLM)
-- **Online Search Fallback** saat confidence rendah
-- **Human-in-the-loop Knowledge Approval**
-- **Confidence Score** untuk setiap jawaban
-- **API-first Design** (Web, WhatsApp, Telegram, n8n)
-- **CPU-only** (tanpa GPU)
+- Semantic vector retrieval for structured RFID traces
+- Hybrid RAG design combining local retrieval and external search
+- Confidence-based routing for generation control
+- Human-in-the-loop knowledge validation mechanism
+- API-based experimental interface for querying and evaluation
+- CPU-only deployment for reproducible experimentation
 
 ---
 
@@ -116,6 +123,7 @@ This project includes exploratory research on:
 - effects of contextualized queries on hallucination control  
 - comparison of raw vs. RAG-augmented LLM outputs
 - domain-specific vs. generic retrieval strategies
+- serves as preliminary groundwork for studying controllable LLM behavior under domain constraints
 
 ---
 
