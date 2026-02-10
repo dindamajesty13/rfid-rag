@@ -16,7 +16,7 @@ LLM_MODEL = "mistral"
 OLLAMA_URL = "http://localhost:11434/api/generate"
 
 TOP_K = 3
-RAG_THRESHOLD = 0.55   # ⬅️ PENTING
+RAG_THRESHOLD = 0.55
 ONLINE_FALLBACK_THRESHOLD = 0.45
 MIN_CONFIDENCE = 0.3
 MAX_CONFIDENCE = 0.95
@@ -109,7 +109,7 @@ def call_llm(prompt: str) -> str:
         res = requests.post(
             OLLAMA_URL,
             json=payload,
-            timeout=6000  # ⬅️ NAIKKAN
+            timeout=3000
         )
         res.raise_for_status()
         return res.json()["response"].strip()
@@ -149,7 +149,7 @@ class RAGEngine:
         self.data = load_dataset(self.dataset_path)
         self.corpus, self.metadata = build_corpus(self.data)
         self.vstore = VectorStore(self.corpus)
-        print(f"✅ RAG loaded: {len(self.corpus)} knowledge")
+        print(f"RAG loaded: {len(self.corpus)} knowledge")
 
     def _confidence(self, score: float, pure_llm=False) -> float:
         if pure_llm:
