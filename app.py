@@ -6,7 +6,7 @@ from services.ingestion import (
     approve_contribution,
     reject_contribution,
 )
-from services import reindex   # ⬅️ IMPORT MODULE, BUKAN VARIABLE
+from services import reindex
 from services.ingestion import get_pending
 
 DATASET_PATH = "data/data.json"
@@ -15,7 +15,7 @@ app = FastAPI(title="RFID RAG API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # MVP ONLY
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
